@@ -42,14 +42,16 @@ div.selecionados label {
 
 div.options {
   display: flex;
-  margin: 0.5rem 0;
+  flex-wrap: wrap;
 }
 
-div.options div {
+div.select {
+  display: flex;
+  align-items: center;
   background-color: rgba(30,144,255);
   font-size: 1.5rem;
   padding: 0.5rem 1.5rem;
-  margin-right: 1rem;
+  margin: 0 1rem .5rem 0;
   border-radius: 20px;
   color: #fff;
 }
