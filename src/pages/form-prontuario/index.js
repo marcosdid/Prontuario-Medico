@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Select from '../../components/Select'
 import Button from '../../components/Button'
@@ -7,6 +7,16 @@ import Textarea from '../../components/Textarea'
 import './styles.css'
 
 const Form = () => {
+  const [queixa, setQueixa] = useState({})
+  const [doenca, setDoenca] = useState({})
+  const [historico, setHistorico] = useState('')
+
+  function test(e) {
+    e.preventDefault()
+
+    console.log({ queixa, doenca, historico })
+  }
+
   return (
     <div className='container'>
       <div className='main'>
@@ -14,10 +24,14 @@ const Form = () => {
           <h1>Anamnese</h1>
         </header>
 
-        <form className='formulario'>
+        <form onSubmit={test} className='formulario'>
           <Select
             name='Queixa'
             label='Queixa Principal'
+            inputValue={queixa}
+            onChange={(e) => {
+              setQueixa(e.target.value)
+            }}
             options={[
               { value: 1, label: 'Dor de cabeça' },
               { value: 2, label: 'Dor nas costas' },
@@ -27,6 +41,10 @@ const Form = () => {
           <Select
             name='Doenças'
             label='Doenças Adulto'
+            inputValue={doenca}
+            onChange={(e) => {
+              setDoenca(e.target.value)
+            }}
             options={[
               { value: 1, label: 'Diabetes' },
               { value: 2, label: 'Câncer' },
@@ -42,6 +60,10 @@ const Form = () => {
           </div>
 
           <Textarea
+            value={historico}
+            onChange={(e) => {
+              setHistorico(e.target.value)
+            }}
             name='historico'
             label='Histórico de Moléstia'
             placeholder='Digite...'
