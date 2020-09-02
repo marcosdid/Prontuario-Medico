@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Select from '../../components/Select'
 import Button from '../../components/Button'
@@ -14,16 +15,33 @@ const Form = () => {
   const [queixas, setQueixas] = useState([])
   const [doencas, setDoencas] = useState([])
 
-  const [userQueixa, setUserQueixa] = useState({})
-  const [userDoenca, setUserDoenca] = useState({})
+  const [userQueixa, setUserQueixa] = useState()
+  const [userDoenca, setUserDoenca] = useState([])
   const [historico, setHistorico] = useState('')
 
   const [selects, setSelects] = useState([])
 
-  function test(e) {
+  const history = useHistory()
+
+  async function handleFormSubmit(e) {
     e.preventDefault()
 
-    console.log({ userQueixa, userDoenca, historico })
+    try {
+      const userProntuario = await api.post('/prontuario', {
+        queixa: userQueixa,
+        doencas: userDoenca,
+        historico,
+      })
+
+      localStorage.setItem(
+        String(userProntuario.data._id),
+        JSON.stringify(userProntuario.data)
+      )
+
+      history.push('/')
+    } catch (error) {
+      alert('Algo deu errado, tente novamente mais tarde!!')
+    }
   }
 
   function handleDeleteSelectedItem(id) {
@@ -51,13 +69,13 @@ const Form = () => {
           <h1>Anamnese</h1>
         </header>
 
-        <form onSubmit={test} className='formulario'>
+        <form onSubmit={handleFormSubmit} className='formulario'>
           <Select
             name='Queixa'
             label='Queixa Principal'
             value={userQueixa}
             onChange={(e) => {
-              setUserQueixa(e.target.value)
+              setUserQueixa(Number(e.target.value))
             }}
             options={queixas}
           />
@@ -67,7 +85,9 @@ const Form = () => {
             label='Doenças Adulto'
             value={userDoenca}
             onChange={(e) => {
-              setUserDoenca(e.target.value)
+              const doencas = userDoenca
+              doencas.push(e.target.value)
+              setUserDoenca(doencas)
               setSelects([...selects, { id: e.target.value - 1 }])
             }}
             options={doencas}
