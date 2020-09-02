@@ -1,5 +1,4 @@
 import React from 'react'
-import Select from 'react-select'
 
 import './styles.css'
 
@@ -7,12 +6,14 @@ const SelectButton = ({ label, name, options, ...rest }) => {
   return (
     <div className='select-block'>
       <label htmlFor={name}>{label}</label>
-      <select id={name} {...rest}>
-        <option>Selecione uma Opção</option>
+      <select value='' id={name} {...rest}>
+        <option value='' disabled hidden>
+          Selecione uma Opção
+        </option>
 
         {options.map((option) => {
           return (
-            <option key={option.value} value={option.value}>
+            <option key={option.id} value={option.id}>
               {option.label}
             </option>
           )
