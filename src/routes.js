@@ -1,8 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-
-import Form from './pages/FormProntuario'
-import List from './pages/ListProntuario'
+import Form from './pages/form-prontuario'
+import List from './pages/list-prontuario'
 
 const Routes = () => {
   return (
