@@ -1,0 +1,11 @@
+div#container {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
+  background-color: rgba(220,220,220, .3);
+}
+
+div#container p {
+  font-size: 1.8rem;
+  margin: 1rem 0;
+}

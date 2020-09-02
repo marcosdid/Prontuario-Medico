@@ -2,9 +2,9 @@ import React from 'react'
 
 import Select from '../../components/Select'
 import Button from '../../components/Button'
+import Textarea from '../../components/Textarea'
 
 import './styles.css'
-import Textarea from '../../components/Textarea'
 
 const Form = () => {
   return (
