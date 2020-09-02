@@ -1,0 +1,55 @@
+div.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(220,220,220, .3);
+}
+
+div.main {
+  width: 90vw;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+div.main header {
+  display: flex;
+  align-items: center;
+  height: 6rem;
+  padding-left: 1.5rem;
+  background-color: rgba(30,144,255);
+  color: #fff;
+  border-radius: 20px 20px 0px 0px;
+}
+
+div.main header h1 {
+  font-size: 2rem;
+}
+
+form.formulario {
+  padding: 1rem 1.5rem;
+}
+
+form.formulario div.selecionados {
+  margin-top: 1rem;
+}
+
+div.selecionados label {
+  font-size: 2rem;
+}
+
+div.selecionados div.options {
+  display: flex;
+  margin: 0.5rem 0;
+}
+
+div.selecionados div.options div {
+  background-color: rgba(30,144,255);
+  font-size: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  margin-right: 1rem;
+  border-radius: 20px;
+  color: #fff;
+}
