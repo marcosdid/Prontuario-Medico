@@ -1,11 +1,9 @@
 import React from 'react'
 
+import Route from './routes'
+
 function App() {
-  return (
-    <div className='App'>
-      <h1>Hello Word</h1>
-    </div>
-  )
+  return <Route />
 }
 
 export default App
