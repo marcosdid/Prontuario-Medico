@@ -7,8 +7,8 @@ const SelectButton = ({ label, name, options, ...rest }) => {
     <div className='select-block'>
       <label htmlFor={name}>{label}</label>
       <select value='' id={name} {...rest}>
-        <option value='' disabled hidden>
-          Selecione uma Opção
+        <option value='' hidden>
+          Selecione uma opção
         </option>
 
         {options.map((option) => {
