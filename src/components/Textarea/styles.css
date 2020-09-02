@@ -1,0 +1,20 @@
+div.textarea-block {
+  margin-top: 2rem;
+}
+
+div.textarea-block label {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+div.textarea-block textarea {
+  width: 100%;
+  height: 15rem;
+  padding: 1.5rem;
+  border: none;
+  font-size: 1.5rem;
+  color: rgba(169,169,169);
+  background-color: rgba(220,220,220, .3);
+  border-radius: 10px;
+}
