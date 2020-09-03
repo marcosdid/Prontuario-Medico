@@ -7,6 +7,7 @@ import deleteIcon from '../../assets/icons/x.svg'
 import timeIcon from '../../assets/icons/clock.svg'
 
 import './styles.css'
+import UserSelect from '../../components/userSelect'
 
 const List = () => {
   const history = useHistory()
@@ -77,9 +78,7 @@ const List = () => {
                       <div className='options-block'>
                         {item.doencas.map((item) => {
                           return (
-                            <div key={item.id} className='select-block'>
-                              <p>{item.label}</p>
-                            </div>
+                            <UserSelect key={item.key} label={item.label} />
                           )
                         })}
                       </div>
