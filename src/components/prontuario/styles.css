@@ -33,7 +33,7 @@ div.main-block {
   border-radius: 0 0 .8rem .8rem;
 }
 
-div.content header p {
+div.time {
   background-color: rgba(30,144,255);
   display: flex;
   align-items: center;
@@ -43,14 +43,25 @@ div.content header p {
   border-radius: .8rem .8rem 0 0;
 }
 
-div.content header p img {
+div.time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.time p {
+  display: flex;
+  align-items: center;
+}
+
+div.time p img {
   margin-right: .5rem;
   width: 2rem;
 }
 
 div.content header h1 {
-  background-color:rgba(30,144,255, .5);
-  color: rgba(70,130,180);
+  background-color:rgba(30,144,255, .2);
+  color: rgba(30,144,255);
   padding: 1rem;
 }
 
