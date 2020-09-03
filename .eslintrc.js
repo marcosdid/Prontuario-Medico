@@ -1,23 +1,19 @@
 module.exports = {
   env: {
     browser: true,
-    jest: true,
-    es2020: true,
+    commonjs: true,
+    es2021: true,
+    mocha: true,
   },
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  parser: 'babel-eslint',
+  extends: ['plugin:mocha/recommended', 'eslint:recommended'],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 11,
-    sourceType: 'module',
+    ecmaVersion: 12,
   },
-  plugins: ['react', 'prettier', 'styled-components-a11y'],
   rules: {
-    'prettier/prettier': 'error',
-    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
-    'import/prefer-default-export': 'off',
-    'jsx-quotes': ['error', 'prefer-single'],
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'windows'],
+    quotes: ['error', 'double'],
+    semi: ['error', 'always'],
   },
+  plugins: ['mocha'],
 }
