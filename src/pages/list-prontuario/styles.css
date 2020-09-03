@@ -5,7 +5,7 @@ div#container {
   background-color: rgba(220,220,220, .3);
 }
 
-div#container p {
+.para {
   font-size: 1.8rem;
   margin: 1rem 0;
 }
