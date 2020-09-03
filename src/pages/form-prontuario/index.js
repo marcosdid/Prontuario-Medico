@@ -16,8 +16,8 @@ const Form = () => {
   const [doencas, setDoencas] = useState([])
 
   const [userQueixa, setUserQueixa] = useState()
-  const [userDoenca, setUserDoenca] = useState([])
   const [historico, setHistorico] = useState()
+  const [userDoencaSelects, setUserDoencaSelects] = useState([])
 
   const [selects, setSelects] = useState([])
 
@@ -26,7 +26,7 @@ const Form = () => {
   async function handleFormSubmit(e) {
     e.preventDefault()
 
-    if (userQueixa === undefined) {
+    if (!userQueixa) {
       return alert('Queixa principal é um campo obrigatorio !!')
     }
 
@@ -37,7 +37,7 @@ const Form = () => {
     try {
       const userProntuario = await api.post('/prontuario', {
         queixa: userQueixa,
-        doencas: userDoenca,
+        doencas: userDoencaSelects,
         historico,
       })
 
@@ -52,11 +52,17 @@ const Form = () => {
     }
   }
 
-  function handleDeleteSelectedItem(id) {
-    const selecionados = selects.filter((item, index) => {
-      return index !== id
+  function handleDeleteSelectedItem(select) {
+    const newDoencaSelects = userDoencaSelects.filter((item) => {
+      return item != select + 1
     })
-    setSelects(selecionados)
+    const newSelects = selects.filter((item) => {
+      return item !== select
+    })
+    console.log(newDoencaSelects)
+    console.log(newSelects)
+    setUserDoencaSelects(newDoencaSelects)
+    setSelects(newSelects)
   }
 
   useEffect(() => {
@@ -91,12 +97,10 @@ const Form = () => {
           <Select
             name='Doenças'
             label='Doenças Adulto'
-            value={userDoenca}
             onChange={(e) => {
-              const doencas = userDoenca
-              doencas.push(e.target.value - 1)
-              setUserDoenca(doencas)
-              setSelects([...selects, { id: e.target.value - 1 }])
+              const doencas = userDoencaSelects
+              setUserDoencaSelects([...doencas, e.target.value])
+              setSelects([...selects, e.target.value - 1])
             }}
             options={doencas}
           />
@@ -104,15 +108,15 @@ const Form = () => {
           <div className='selecionados'>
             <label>Selecionados:</label>
             <div className='options'>
-              {selects.map((select, index) => {
+              {selects.map((select) => {
                 return (
-                  <div key={select.id} className='select'>
-                    <p>{doencas[select.id].label}</p>
+                  <div key={select} className='select'>
+                    <p>{doencas[select].label}</p>
                     <img
                       src={deleteIcon}
                       alt='delete'
                       onClick={() => {
-                        handleDeleteSelectedItem(index)
+                        handleDeleteSelectedItem(select)
                       }}
                     />
                   </div>
