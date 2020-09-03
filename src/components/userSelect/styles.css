@@ -1,0 +1,10 @@
+div.select-block {
+  display: flex;
+  align-items: center;
+  background-color: rgba(30,144,255);
+  font-size: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  margin: 0 1rem .5rem 0;
+  border-radius: 20px;
+  color: #fff;
+}
