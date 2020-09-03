@@ -55,6 +55,7 @@ div.select {
   color: #fff;
 }
 
+
 @media(min-width: 700px) {
   div.container {
     align-items: center;

@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom'
 import Select from '../../components/Select'
 import Button from '../../components/Button'
 import Textarea from '../../components/Textarea'
+import UserSelect from '../../components/userSelect'
 
+import missingErrorValidator from '../../helpers/errors/MissingErrorValidator'
 import api from '../../services/api'
 
 import deleteIcon from '../../assets/icons/x.svg'
@@ -27,11 +29,11 @@ const Form = () => {
     e.preventDefault()
 
     if (!userQueixa) {
-      return alert('Queixa principal é um campo obrigatorio !!')
+      return missingErrorValidator('*Queixa Principal*')
     }
 
     if (!historico) {
-      return alert('Historico de Moléstia é um campo obrigatorio !!')
+      return missingErrorValidator('*Doenças Adulto*')
     }
 
     try {
@@ -59,10 +61,17 @@ const Form = () => {
     const newSelects = selects.filter((item) => {
       return item !== select
     })
-    console.log(newDoencaSelects)
-    console.log(newSelects)
     setUserDoencaSelects(newDoencaSelects)
     setSelects(newSelects)
+  }
+
+  function handleNewSelectUserItem(e) {
+    const doencas = userDoencaSelects
+    if (doencas.length > 0 && doencas.indexOf(e.target.value) > -1) {
+      return alert('Não é permitido Doenças repetidas')
+    }
+    setUserDoencaSelects([...doencas, e.target.value])
+    setSelects([...selects, e.target.value - 1])
   }
 
   useEffect(() => {
@@ -86,6 +95,7 @@ const Form = () => {
         <form onSubmit={handleFormSubmit} className='formulario'>
           <Select
             name='Queixa'
+            required
             label='Queixa Principal *'
             value={userQueixa}
             onChange={(e) => {
@@ -97,11 +107,7 @@ const Form = () => {
           <Select
             name='Doenças'
             label='Doenças Adulto'
-            onChange={(e) => {
-              const doencas = userDoencaSelects
-              setUserDoencaSelects([...doencas, e.target.value])
-              setSelects([...selects, e.target.value - 1])
-            }}
+            onChange={(e) => handleNewSelectUserItem(e)}
             options={doencas}
           />
 
@@ -110,8 +116,7 @@ const Form = () => {
             <div className='options'>
               {selects.map((select) => {
                 return (
-                  <div key={select} className='select'>
-                    <p>{doencas[select].label}</p>
+                  <UserSelect key={select} label={doencas[select].label}>
                     <img
                       src={deleteIcon}
                       alt='delete'
@@ -119,7 +124,7 @@ const Form = () => {
                         handleDeleteSelectedItem(select)
                       }}
                     />
-                  </div>
+                  </UserSelect>
                 )
               })}
             </div>
@@ -130,6 +135,7 @@ const Form = () => {
             onChange={(e) => {
               setHistorico(e.target.value)
             }}
+            required
             name='historico'
             label='Histórico de Moléstia *'
             placeholder='Digite...'
