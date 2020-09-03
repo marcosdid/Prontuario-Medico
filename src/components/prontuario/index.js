@@ -1,62 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+
+import timeIcon from '../../assets/icons/clock.svg'
 
 import './styles.css'
 
-const Pront = () => {
-  const [prontuarios, setProntua] = useState([])
-  useEffect(() => {
-    const indices = Object.keys(localStorage)
-
-    const pronts = indices.map((key) => {
-      return JSON.parse(localStorage.getItem(key))
-    })
-
-    setProntua(pronts)
-  }, [])
+const Pront = ({ date, queixa, doencas, historico }) => {
+  const data = date.split(':')[0].split('-')
+  const day = data[2].split('T')[0]
+  const hour = date.split(':')[1]
+  const minutes = date.split(':')[2].split('.')[0]
 
   return (
-    <>
-      {prontuarios.map((item) => {
-        return (
-          <div className='block-pront' key={item}>
-            <div className='date'>
-              <p>{item.created_at}</p>
-            </div>
-            <div className='content'>
-              <header>
-                <h1>{item.created_at}</h1>
-                <h2>Anamnese</h2>
-              </header>
+    <div className='block-pront'>
+      <div className='date'>
+        <p className='day'>{day}</p>
+        <p className='month'>{data[1]}</p>
+        <p className='year'>{data[0]}</p>
+      </div>
+      <div className='content'>
+        <header>
+          <p>
+            <img src={timeIcon} alt='time' /> {`${hour}:${minutes}`}
+          </p>
+          <h1>Anamnese</h1>
+        </header>
 
-              <div className='main-block'>
-                <div className='block'>
-                  <h1>Queixa Principal</h1>
-                  <p>{item.queixa.label}</p>
-                </div>
+        <div className='main-block'>
+          <div className='block'>
+            <h1>Queixa Principal</h1>
+            <p>{queixa.label}</p>
+          </div>
 
-                <div className='doencas'>
-                  <h1>Doenças Adulto</h1>
-                  <div className='options-block'>
-                    {item.doencas.map((item) => {
-                      return (
-                        <div key={item.id} className='select-block'>
-                          <p>{item.label}</p>
-                        </div>
-                      )
-                    })}
+          <div className='doencas'>
+            <h1>Doenças Adulto</h1>
+            <div className='options-block'>
+              {doencas.map((item) => {
+                return (
+                  <div key={item.id} className='select-block'>
+                    <p>{item.label}</p>
                   </div>
-                </div>
-
-                <div className='block'>
-                  <h1>Historico de moléstia</h1>
-                  <p>{item.historico}</p>
-                </div>
-              </div>
+                )
+              })}
             </div>
           </div>
-        )
-      })}
-    </>
+
+          <div className='block'>
+            <h1>Historico de moléstia</h1>
+            <p>{historico}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
