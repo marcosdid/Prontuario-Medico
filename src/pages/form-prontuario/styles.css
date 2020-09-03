@@ -5,12 +5,12 @@ div.container {
   padding: 2rem 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(220,220,220, .3);
+  background-color: rgba(220,220,220, .8);
 }
 
 div.main {
   width: 90vw;
-  border-radius: 20px;
+  border-radius: 15px;
   background-color: #fff;
 }
 
@@ -21,7 +21,7 @@ div.main header {
   padding-left: 1.5rem;
   background-color: rgba(30,144,255);
   color: #fff;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 15px 15px 0px 0px;
 }
 
 div.main header h1 {

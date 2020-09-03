@@ -17,7 +17,7 @@ const Form = () => {
 
   const [userQueixa, setUserQueixa] = useState()
   const [userDoenca, setUserDoenca] = useState([])
-  const [historico, setHistorico] = useState('')
+  const [historico, setHistorico] = useState()
 
   const [selects, setSelects] = useState([])
 
@@ -26,12 +26,22 @@ const Form = () => {
   async function handleFormSubmit(e) {
     e.preventDefault()
 
+    if (!userQueixa) {
+      return alert('Queixa principal é um campo obrigatorio !!')
+    }
+
+    if (!historico) {
+      return alert('Historico de Moléstia é um campo obrigatorio !!')
+    }
+
     try {
       const userProntuario = await api.post('/prontuario', {
         queixa: userQueixa,
         doencas: userDoenca,
         historico,
       })
+
+      console.log(userProntuario)
 
       localStorage.setItem(
         String(userProntuario.data._id),
@@ -72,10 +82,10 @@ const Form = () => {
         <form onSubmit={handleFormSubmit} className='formulario'>
           <Select
             name='Queixa'
-            label='Queixa Principal'
+            label='Queixa Principal *'
             value={userQueixa}
             onChange={(e) => {
-              setUserQueixa(Number(e.target.value))
+              setUserQueixa(Number(e.target.value - 1))
             }}
             options={queixas}
           />
@@ -86,7 +96,7 @@ const Form = () => {
             value={userDoenca}
             onChange={(e) => {
               const doencas = userDoenca
-              doencas.push(e.target.value)
+              doencas.push(Number(e.target.value - 1))
               setUserDoenca(doencas)
               setSelects([...selects, { id: e.target.value - 1 }])
             }}
@@ -119,8 +129,10 @@ const Form = () => {
               setHistorico(e.target.value)
             }}
             name='historico'
-            label='Histórico de Moléstia'
+            label='Histórico de Moléstia *'
             placeholder='Digite...'
+            maxlength='1000'
+            minlength='10'
           />
 
           <Button type='submit'>Salvar</Button>
