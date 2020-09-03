@@ -26,7 +26,7 @@ const Form = () => {
   async function handleFormSubmit(e) {
     e.preventDefault()
 
-    if (!userQueixa) {
+    if (userQueixa === undefined) {
       return alert('Queixa principal é um campo obrigatorio !!')
     }
 
@@ -40,8 +40,6 @@ const Form = () => {
         doencas: userDoenca,
         historico,
       })
-
-      console.log(userProntuario)
 
       localStorage.setItem(
         String(userProntuario.data._id),
@@ -85,7 +83,7 @@ const Form = () => {
             label='Queixa Principal *'
             value={userQueixa}
             onChange={(e) => {
-              setUserQueixa(Number(e.target.value - 1))
+              setUserQueixa(e.target.value)
             }}
             options={queixas}
           />
@@ -96,7 +94,7 @@ const Form = () => {
             value={userDoenca}
             onChange={(e) => {
               const doencas = userDoenca
-              doencas.push(Number(e.target.value - 1))
+              doencas.push(e.target.value - 1)
               setUserDoenca(doencas)
               setSelects([...selects, { id: e.target.value - 1 }])
             }}
@@ -131,8 +129,8 @@ const Form = () => {
             name='historico'
             label='Histórico de Moléstia *'
             placeholder='Digite...'
-            maxlength='1000'
-            minlength='10'
+            maxLength='1000'
+            minLength='10'
           />
 
           <Button type='submit'>Salvar</Button>
