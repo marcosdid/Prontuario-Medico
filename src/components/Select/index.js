@@ -4,8 +4,10 @@ import './styles.css'
 
 const SelectButton = ({ label, name, options, ...rest }) => {
   return (
-    <div className='select-block'>
-      <label htmlFor={name}>{label}</label>
+    <div className='block-select'>
+      <label htmlFor={name}>
+        <p>{label}</p>
+      </label>
       <select value='' id={name} {...rest}>
         <option value='' hidden>
           Selecione uma opção
